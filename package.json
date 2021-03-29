@@ -1,6 +1,6 @@
 {
   "name": "@suin/esa-markdown-format",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "esa.ioのMarkdownを自動整形する関数です",
   "keywords": [
     "esa"
