@@ -1,0 +1,113 @@
+{
+  "name": "@suin/esa-markdown-format",
+  "version": "0.0.0-development",
+  "description": "esa.ioのMarkdownを自動整形する関数です",
+  "keywords": [
+    "esa"
+  ],
+  "homepage": "https://github.com/suin/esa-markdown-format#readme",
+  "bugs": {
+    "url": "https://github.com/suin/esa-markdown-format/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suin/esa-markdown-format.git"
+  },
+  "license": "MIT",
+  "author": "suin <suinyeze@gmail.com>",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "**/*.{js,ts,map}",
+    "!*.{test,spec}.*",
+    "!/types/this.d.ts"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -Xdf -e '!/.idea/**' -e '!/node_modules' -e '!/node_modules/**'",
+    "clean:dry": "git clean -Xdfn -e '!/.idea/**' -e '!/node_modules' -e '!/node_modules/**'",
+    "format": "pnpm prettier -- --write",
+    "format:check": "pnpm prettier -- --check",
+    "pack:preview": "PACKAGE=$(npm pack 2> /dev/null) sh -c 'set -eu && tar tf $PACKAGE | sort && rm $PACKAGE'",
+    "prettier": "prettier '**/*.{ts,tsx,json,json5,css,scss,graphql,gql,md,mdx,html,vue,yaml}'",
+    "reference": "typedoc --includeVersion --exclude 'node_modules/**/*' --exclude '**/*+(.spec|.test).ts' --excludeInternal --gitRevision \"`git describe --tags --abbrev=0 || echo main`\" --out reference .",
+    "reset": "git clean -Xdf -e '!/.idea/**'",
+    "reset:dry": "git clean -Xdfn -e '!/.idea/**'",
+    "semantic-release": "semantic-release",
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,json,json5,css,scss,graphql,gql,md,mdx,html,vue,yaml}": "prettier --write",
+    "./package.json": "sort-package-json"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": true
+        }
+      ],
+      "@semantic-release/github",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "CHANGELOG.md"
+          ]
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "successCmd": "pnpm reference"
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "@types/jest": "^26.0.22",
+    "husky": "^5.2.0",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.4",
+    "semantic-release": "^17.4.2",
+    "sort-package-json": "^1.49.0",
+    "ts-jest": "^26.5.4",
+    "typedoc": "^0.20.34",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "prettier": "^2.2.1",
+    "prettier-plugin-md-nocjsp": "^1.0.2",
+    "remark": "^13.0.0",
+    "remark-lint-code-block-style": "^2.0.1",
+    "remark-relative-links": "^0.0.6"
+  }
+}
