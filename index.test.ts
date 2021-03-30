@@ -1,4 +1,4 @@
-import format from ".";
+import format from "./index";
 
 describe("format", () => {
   test("usage", () => {
