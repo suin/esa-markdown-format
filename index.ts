@@ -13,6 +13,7 @@ function format(markdownText: string, options: FormatOptions): string {
   const { team } = options;
   markdownText = formatUsingPrettier(markdownText);
   markdownText = formatUsingRemark(markdownText, { team });
+  markdownText = newlineCRLF(markdownText); // esaのMarkdownの改行コードはCRLFで、LFに直してもesa側でCRLFに直されるので、CRLFに統一する
   return markdownText;
 }
 
@@ -54,6 +55,10 @@ function formatUsingRemark(
     })
     .processSync(markdownText);
   return file.toString();
+}
+
+function newlineCRLF(markdownText: string): string {
+  return markdownText.replace(/\r\n|\r|\n/g, "\r\n");
 }
 
 export default format;
