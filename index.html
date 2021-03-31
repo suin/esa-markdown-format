@@ -1,0 +1,169 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@suin/esa-markdown-format</title>
+	<meta name="description" content="Documentation for @suin/esa-markdown-format">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@suin/esa-markdown-format</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>@suin/esa-markdown-format</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#suinesa-markdown-format" id="suinesa-markdown-format" style="color: inherit; text-decoration: none;">
+					<h1>@suin/esa-markdown-format</h1>
+				</a>
+				<p>esa.ioのMarkdownを自動整形する関数です。</p>
+				<a href="#特徴" id="特徴" style="color: inherit; text-decoration: none;">
+					<h2>特徴</h2>
+				</a>
+				<ul>
+					<li>PrettierによるMarkdownの自動整形</li>
+					<li>PrettierによるMarkdown内コードブロックの自動整形</li>
+					<li>esa内部リンクを絶対URLから相対URLにする</li>
+				</ul>
+				<a href="#インストール" id="インストール" style="color: inherit; text-decoration: none;">
+					<h2>インストール</h2>
+				</a>
+				<pre><code class="language-bash"><span style="color: #000000">yarn add @suin/esa-markdown-format</span>
+<span style="color: #008000"># or</span>
+<span style="color: #000000">npm install @suin/esa-markdown-format</span>
+</code></pre>
+				<a href="#使い方" id="使い方" style="color: inherit; text-decoration: none;">
+					<h2>使い方</h2>
+				</a>
+				<p><code>format</code>関数にフォーマットしたいMarkdownとチーム名を渡すと、フォーマットされたMarkdownが返ります:</p>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">format</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@suin/esa-markdown-format&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">input</span><span style="color: #000000"> = </span><span style="color: #A31515">`</span>
+<span style="color: #A31515">ヘッダ</span>
+<span style="color: #A31515">=====</span>
+
+<span style="color: #A31515">* リスト</span>
+<span style="color: #A31515">* リスト</span>
+
+<span style="color: #A31515">|カラム1|カラム2|カラム3|</span>
+<span style="color: #A31515">|---|---|---|</span>
+<span style="color: #A31515">|a|b|c|</span>
+
+<span style="color: #A31515">~~~js</span>
+<span style="color: #A31515">const uglyCode=function(){return &#039;omg&#039;}</span>
+<span style="color: #A31515">~~~</span>
+
+<span style="color: #A31515">    const indented = &quot;code&quot;;</span>
+
+<span style="color: #A31515">[絶対URL](https://example.esa.io/posts/1)`</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">output</span><span style="color: #000000"> = </span><span style="color: #795E26">format</span><span style="color: #000000">(</span><span style="color: #001080">input</span><span style="color: #000000">, { </span><span style="color: #001080">team:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;example&quot;</span><span style="color: #000000"> });</span>
+</code></pre>
+				<p><code>output</code>の内容:</p>
+				<pre><code class="language-markdown"><span style="color: #800000"># ヘッダ</span>
+
+<span style="color: #0451A5">-</span><span style="color: #000000"> リスト</span>
+<span style="color: #0451A5">-</span><span style="color: #000000"> リスト</span>
+
+<span style="color: #000000">| カラム1 | カラム2 | カラム3 |</span>
+<span style="color: #000000">| ------- | ------- | ------- |</span>
+<span style="color: #000000">| a       | b       | c       |</span>
+
+<span style="color: #000000">```js</span>
+<span style="color: #0000FF">const</span><span style="color: #000000FF"> </span><span style="color: #795E26">uglyCode</span><span style="color: #000000FF"> </span><span style="color: #000000">=</span><span style="color: #000000FF"> </span><span style="color: #0000FF">function</span><span style="color: #000000FF"> () {</span>
+<span style="color: #000000FF">  </span><span style="color: #AF00DB">return</span><span style="color: #000000FF"> </span><span style="color: #A31515">&quot;omg&quot;</span><span style="color: #000000FF">;</span>
+<span style="color: #000000FF">};</span>
+<span style="color: #000000">```</span>
+
+<span style="color: #000000">```</span>
+<span style="color: #000000">const indented = &quot;code&quot;;</span>
+<span style="color: #000000">```</span>
+
+<span style="color: #000000">[</span><span style="color: #A31515">絶対URL</span><span style="color: #000000">]</span><span style="color: #000000">(</span><span style="color: #000000">/posts/1</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#api-リファレンス" id="api-リファレンス" style="color: inherit; text-decoration: none;">
+					<h2>API リファレンス</h2>
+				</a>
+				<p><a href="https://suin.github.io/esa-markdown-format/">https://suin.github.io/esa-markdown-format/</a></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#formatoptions" class="tsd-kind-icon">Format<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#default" class="tsd-kind-icon">default</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
