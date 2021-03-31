@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/suin/esa-markdown-format/compare/v1.1.0...v1.2.0) (2021-03-31)
+
+
+### Features
+
+* 🎸 整形後のMarkdownの改行コードをCRLFに統一する ([226da9c](https://github.com/suin/esa-markdown-format/commit/226da9c32e0a8988a576bad925cd86f773835f4a))
+
 # [1.1.0](https://github.com/suin/esa-markdown-format/compare/v1.0.0...v1.1.0) (2021-03-31)
 
 
