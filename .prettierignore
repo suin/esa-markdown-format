@@ -12,3 +12,4 @@
 # project level type definition shouldn't be ignored.
 !/types/**/*.d.ts
 pnpm-lock.yaml
+/demo
