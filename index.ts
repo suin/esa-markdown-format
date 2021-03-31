@@ -1,5 +1,7 @@
 import prettier from "prettier";
 import remark from "remark";
+import listItem from "./listItem";
+import { relativeLinks } from "./relativeLinks";
 
 /**
  * 与えられたMarkdownテキストを整形して返す
@@ -9,8 +11,8 @@ import remark from "remark";
  */
 function format(markdownText: string, options: FormatOptions): string {
   const { team } = options;
-  markdownText = formatUsingRemark(markdownText, { team });
   markdownText = formatUsingPrettier(markdownText);
+  markdownText = formatUsingRemark(markdownText, { team });
   return markdownText;
 }
 
@@ -28,7 +30,7 @@ export type FormatOptions = {
 
 function formatUsingPrettier(markdownText: string): string {
   return prettier.format(markdownText, {
-    parser: "markdown-nocjsp",
+    parser: "markdown-nocjsp", // prettier本家のMarkdownパーサーは英単語の前後にスペースを入れる問題があるので、この問題を対策がされたパーサーを用いています。
     plugins: [require("prettier-plugin-md-nocjsp")],
   });
 }
@@ -38,9 +40,16 @@ function formatUsingRemark(
   { team }: { readonly team: string }
 ): string {
   const file = remark()
-    .use(require("remark-lint-code-block-style"), "fenced")
-    .use({ settings: { fences: true } })
-    .use(require("remark-relative-links"), {
+    .use(require("remark-gfm"))
+    .use({
+      settings: {
+        fences: true,
+        bullet: "-",
+        listItemIndent: "one",
+        handlers: { listItem },
+      },
+    })
+    .use(relativeLinks, {
       domainRegex: new RegExp(`http[s]*:\\/\\/${team}\\.esa\\.io[/]?`),
     })
     .processSync(markdownText);
